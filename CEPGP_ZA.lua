@@ -40,24 +40,24 @@ function CEPGP_ZA_hook()
 				local function update()
 					if msg ~= "" and msg ~= nil or encounter then
 						if encounter then -- a boss was killed
-							CEPGP_addTraffic("Raid", UnitName("player"), "Add Raid EP +" .. amount .. " to those in " ..myzone .. " - " .. encounter, "", "", "", "", "", time());
+							CEPGP_addTraffic("Raid", PLAYER_NAME, "Add Raid EP +" .. amount .. " to those in " ..myzone .. " - " .. encounter, "", "", "", "", "", time());
 							CEPGP_sendChatMessage(msg, CEPGP.Channel);
 						else -- EP was manually given, could be either positive or negative, and a message was written
 							if tonumber(amount) <= 0 then
-								CEPGP_addTraffic("Raid", UnitName("player"), "Subtract Raid EP " .. amount .. " from those in " .. myzone .. " (" .. msg .. ")", "", "", "", "", "", time());
+								CEPGP_addTraffic("Raid", PLAYER_NAME, "Subtract Raid EP " .. amount .. " from those in " .. myzone .. " (" .. msg .. ")", "", "", "", "", "", time());
 								CEPGP_sendChatMessage(amount .. " EP taken from all raid members in " .. myzone .. "(" .. msg .. ")", CEPGP.Channel);
 							else
-								CEPGP_addTraffic("Raid", UnitName("player"), "Add Raid EP +" .. amount .. " to those in " .. myzone .. " (" .. msg .. ")", "", "", "", "", "", time());
+								CEPGP_addTraffic("Raid", PLAYER_NAME, "Add Raid EP +" .. amount .. " to those in " .. myzone .. " (" .. msg .. ")", "", "", "", "", "", time());
 								CEPGP_sendChatMessage(amount .. " EP awarded to all raid members in " .. myzone .. " (" .. msg .. ")", CEPGP.Channel);
 							end
 						end
 					else -- no message was written
 						if tonumber(amount) <= 0 then
 							amount = string.sub(amount, 2, string.len(amount));
-							CEPGP_addTraffic("Raid", UnitName("player"), "Subtract Raid EP " .. amount .. " to those in " .. myzone, "", "", "", "", "", time());
+							CEPGP_addTraffic("Raid", PLAYER_NAME, "Subtract Raid EP " .. amount .. " to those in " .. myzone, "", "", "", "", "", time());
 							CEPGP_sendChatMessage(amount .. " EP taken from all raid members in " .. myzone, CEPGP.Channel);
 						else
-							CEPGP_addTraffic("Raid", UnitName("player"), "Add Raid EP +" .. amount .. " to those in " .. myzone, "", "", "", "", "", time());
+							CEPGP_addTraffic("Raid", PLAYER_NAME, "Add Raid EP +" .. amount .. " to those in " .. myzone, "", "", "", "", "", time());
 							CEPGP_sendChatMessage(amount .. " EP awarded to all raid members in " .. myzone, CEPGP.Channel);
 						end
 					end
@@ -118,7 +118,7 @@ function CEPGP_ZA_hook()
 				local raidsize = GetNumGroupMembers();
 
 				for i = 1, raidsize do
-					local rname, _, _, _, _, _, zone = GetRaidRosterInfo(i);
+					local rname, _, _, _, _, _, zone = GetRaidRosterInfoCrossRealm(i);
 					if roster[rname] then
 						roster[rname][4] = zone;
 					end
