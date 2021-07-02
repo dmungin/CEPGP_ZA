@@ -1,0 +1,10 @@
+## Interface: 20501
+## Title: CEPGP_ZoneAwards
+## Author: Tragalix
+## Notes: Provides functionality to award EPs to people in your current zone.
+## Version: 1.0.14
+## Dependencies: CEPGP
+## DefaultState: enabled
+## SavedVariables: CEPGP_ZA
+
+CEPGP_ZA.lua
